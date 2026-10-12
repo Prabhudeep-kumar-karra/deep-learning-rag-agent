@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import pytest
 
+from rag_agent.agent.graph import AgentGraphBuilder
 from rag_agent.agent.state import ChunkMetadata, DocumentChunk
 from rag_agent.vectorstore.store import VectorStoreManager
 
@@ -68,6 +69,20 @@ def bonus_chunk() -> DocumentChunk:
         ),
         metadata=metadata,
     )
+
+
+# ---------------------------------------------------------------------------
+# Graph Builder Tests
+# ---------------------------------------------------------------------------
+
+
+def test_graph_builder_compiles() -> None:
+    """The graph builder should produce a usable LangGraph instance."""
+    graph = AgentGraphBuilder().build()
+    assert hasattr(graph, "invoke")
+    assert "query_rewrite" in graph.nodes
+    assert "retrieval" in graph.nodes
+    assert "generation" in graph.nodes
 
 
 # ---------------------------------------------------------------------------

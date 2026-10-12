@@ -98,11 +98,14 @@ class DocumentChunk:
         The actual content to embed. Between 100 and 300 words.
     metadata : ChunkMetadata
         Structured metadata for filtering and attribution.
+    source : str
+        Source document name for viewer and citation reporting.
     """
 
     chunk_id: str
     chunk_text: str
     metadata: ChunkMetadata
+    source: str = ""
 
 
 @dataclass
